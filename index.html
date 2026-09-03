@@ -1,141 +1,185 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidade Batista da Paz - CBP Sede | Site em Manutenção</title>
-    <meta name="description" content="O site da Comunidade Batista da Paz (CBP Sede) está em manutenção. Siga nosso Instagram para novidades.">
-    <meta property="og:title" content="Comunidade Batista da Paz - CBP Sede">
-    <meta property="og:description" content="Site em manutenção. Siga nosso Instagram para novidades.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://cbpsede.com.br">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        :root {
-            --bg-main: #0B1120;
-            --text-main: #F3F4F6;
-            --text-muted: #9CA3AF;
-            --primary: #0EA5E9;
-            --primary-hover: #0284C7;
-            --accent: #F59E0B;
-            --border-color: rgba(255, 255, 255, 0.08);
-            --font-heading: 'Outfit', sans-serif;
-            --font-body: 'Inter', sans-serif;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: radial-gradient(ellipse at top, #111827 0%, var(--bg-main) 60%);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            text-align: center;
-        }
-        .card {
-            max-width: 480px;
-            width: 100%;
-        }
-        .logo-icon {
-            width: 72px;
-            height: 72px;
-            margin: 0 auto 24px;
-            border-radius: 50%;
-            background: rgba(14, 165, 233, 0.12);
-            border: 1px solid rgba(14, 165, 233, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            color: var(--primary);
-        }
-        .logo-title {
-            font-family: var(--font-heading);
-            font-weight: 800;
-            font-size: 1.75rem;
-            letter-spacing: 0.02em;
-        }
-        .logo-subtitle {
-            display: block;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-top: 4px;
-            margin-bottom: 32px;
-        }
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(245, 158, 11, 0.12);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            color: var(--accent);
-            padding: 8px 18px;
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        h1 {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 1.6rem;
-            margin-bottom: 12px;
-        }
-        p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 32px;
-        }
-        .btn-instagram {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4);
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            padding: 14px 28px;
-            border-radius: 9999px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .btn-instagram:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 24px -6px rgba(221, 42, 123, 0.5);
-        }
-        footer {
-            margin-top: 40px;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunidade Batista da Paz - CBP Sede | São Vicente, SP</title>
+<meta name="description" content="A CBP Sede é uma igreja em São Vicente, SP, nascida em 1989. Adoramos a Deus, crescemos na Palavra e servimos pessoas. Há um lugar para você aqui.">
+<meta property="og:title" content="Comunidade Batista da Paz - CBP Sede">
+<meta property="og:description" content="Uma igreja para viver em família, em São Vicente - SP.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cbpsede.com.br">
+<link rel="icon" href="assets/images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="card">
-        <div class="logo-icon"><i class="fa-solid fa-dove"></i></div>
-        <div class="logo-title">CBP SEDE</div>
-        <span class="logo-subtitle">Comunidade Batista da Paz</span>
 
-        <div class="badge"><i class="fa-solid fa-screwdriver-wrench"></i> Site em manutenção</div>
+<header class="site-header">
+  <div class="bar">
+    <a href="index.html" class="brand">
+      <img src="assets/images/logo.jpg" alt="CBP Sede">
+      <span class="txt"><b>CBP SEDE</b><small>COMUNIDADE BATISTA DA PAZ</small></span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html" class="active">Início</a>
+      <a href="index.html#agenda">Cultos</a>
+      <a href="sobre.html">A Igreja</a>
+      <a href="ministerios.html">Ministérios</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+  </div>
+</header>
 
-        <h1>Estamos preparando novidades</h1>
-        <p>Nosso site está passando por atualizações. Enquanto isso, siga nosso Instagram para ficar por dentro dos cultos, eventos e novidades da CBP Sede.</p>
-
-        <a href="https://www.instagram.com/cbpsede/" target="_blank" rel="noopener" class="btn-instagram">
-            <i class="fa-brands fa-instagram"></i> Seguir no Instagram
-        </a>
-
-        <footer>Comunidade Batista da Paz &middot; CBP Sede</footer>
+<section class="hero" style="background-image:linear-gradient(180deg, rgba(36,14,19,0.5) 0%, rgba(36,14,19,0.8) 60%, var(--cream) 100%), url('assets/images/hero-culto.jpg'); background-size:cover; background-position:center 25%;">
+  <div class="container hero-inner">
+    <span class="eyebrow on-dark">Comunidade Batista da Paz &middot; São Vicente, SP</span>
+    <h1>Uma igreja para<br>viver em família.</h1>
+    <p class="lead">Desde 1989 adoramos a Deus, crescemos na Palavra e servimos pessoas. Há um lugar reservado
+    para você aqui.</p>
+    <div class="actions">
+      <a href="#agenda" class="btn gold">Nossa Programação</a>
+      <a href="contato.html" class="btn outline">Planeje sua visita</a>
     </div>
+  </div>
+</section>
+
+<section class="agenda-strip" id="agenda">
+  <div class="container">
+    <div class="card-time">
+      <div><b>TER &middot; 20H</b><h4>Reunião de Oração</h4></div>
+    </div>
+    <div class="card-time">
+      <div><b>QUA &middot; 20H</b><h4>Reunião de Homens</h4><span class="sub">Quinzenal</span></div>
+    </div>
+    <div class="card-time">
+      <div><b>QUI &middot; 8H</b><h4>Oração das Mulheres</h4></div>
+    </div>
+    <div class="card-time">
+      <div><b>SÁB &middot; 19H30</b><h4>Aviva Jovem</h4></div>
+    </div>
+    <div class="card-time hot">
+      <div><b>DOM &middot; 18H</b><h4>Culto de Celebração</h4></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="container split">
+    <div>
+      <span class="eyebrow">Sobre a CBP Sede</span>
+      <h2>Uma história de fé, coragem e pessoas.</h2>
+      <p>Tudo começou num sábado de janeiro de 1989, num encontro de sete pessoas na casa do Pr. Jorge Henrique
+      e Marli. De lá pra cá, atravessamos o "Barraco de Cristo", a "Caixa de Fósforos" e uma reconstrução feita
+      sem dinheiro em caixa, mas com muita fé. Somos uma igreja viva e relevante, comprometida em fazer diferença
+      num mundo carente da graça de Deus.</p>
+      <blockquote>&ldquo;Glorificar a Deus, proclamando o Evangelho de Jesus Cristo, fazendo discípulos
+      frutíferos e multiplicadores no poder do Espírito Santo.&rdquo;</blockquote>
+      <a href="sobre.html" class="btn outline dark">Conheça nossa história</a>
+    </div>
+    <figure>
+      <img src="assets/images/comunhao.jpg" alt="Membros da CBP Sede se abraçando durante um culto">
+    </figure>
+  </div>
+</section>
+
+<section class="band-dark">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow on-dark">Nossa essência</span>
+      <h2>O que nos move.</h2>
+      <p>Cinco compromissos que orientam tudo o que fazemos, desde os primeiros dias da igreja.</p>
+    </div>
+    <div class="grid-5">
+      <div class="enfase"><span class="num">01</span><h4>Adoração</h4><p>Celebrar a presença de Deus.</p></div>
+      <div class="enfase"><span class="num">02</span><h4>Comunhão</h4><p>Incorporar a família de Deus.</p></div>
+      <div class="enfase"><span class="num">03</span><h4>Discipulado</h4><p>Ensinar o povo de Deus.</p></div>
+      <div class="enfase"><span class="num">04</span><h4>Missões</h4><p>Comunicar a Palavra de Deus.</p></div>
+      <div class="enfase"><span class="num">05</span><h4>Serviço</h4><p>Demonstrar o amor de Deus.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">Para cada fase da vida</span>
+      <h2>Tem um lugar para você.</h2>
+      <p>Conheça algumas das frentes onde a igreja vive seu propósito, semana após semana.</p>
+    </div>
+  </div>
+  <div class="grid-photos">
+    <div class="ph-card"><img src="assets/images/jovens.jpg" alt="Ministério Jovem"><span class="tag">Ministério Jovem</span></div>
+    <div class="ph-card"><img src="assets/images/infantil.jpg" alt="Ministério Infantil"><span class="tag">Ministério Infantil</span></div>
+    <div class="ph-card"><img src="assets/images/familia.jpg" alt="Famílias na CBP Sede"><span class="tag">Famílias e Casais</span></div>
+    <div class="ph-card"><img src="assets/images/missoes.jpg" alt="Missões da CBP Sede"><span class="tag">Missões</span></div>
+  </div>
+  <div class="container" style="text-align:center; margin-top:44px;">
+    <a href="ministerios.html" class="btn outline dark">Ver todos os ministérios</a>
+  </div>
+</section>
+
+<section class="contact-band" id="contato-teaser">
+  <div class="container contact-grid">
+    <div class="contact-info">
+      <span class="eyebrow">Venha nos conhecer</span>
+      <h2>Você é muito bem-vindo.</h2>
+      <p style="color:var(--ink-muted)">Estamos de portas abertas para receber você e sua família.</p>
+      <dl>
+        <dt>Endereço</dt><dd>Rua Dona Anita Costa, 261 &middot; Voturuá &middot; São Vicente - SP</dd>
+        <dt>Telefone</dt><dd>(13) 3561-3765</dd>
+        <dt>E-mail</dt><dd>cbpazsv@gmail.com</dd>
+      </dl>
+      <div class="contact-actions">
+        <a href="https://wa.me/551335613765" class="btn">Falar no WhatsApp</a>
+        <a href="contato.html" class="btn outline dark">Como chegar</a>
+      </div>
+    </div>
+    <div class="map-frame">
+      <iframe loading="lazy" src="https://www.google.com/maps?q=Rua+Dona+Anita+Costa,+261,+S%C3%A3o+Vicente,+SP&output=embed" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="brand"><img src="assets/images/logo.jpg" alt="CBP Sede"><span class="txt"><b>CBP SEDE</b><small>COMUNIDADE BATISTA DA PAZ</small></span></a>
+        <p style="max-width:320px; font-size:0.92rem;">Uma igreja viva e relevante, fazendo diferença num mundo
+        carente da graça de Deus. São Vicente, SP, desde 1989.</p>
+      </div>
+      <div>
+        <h5>Navegação</h5>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">A Igreja</a></li>
+          <li><a href="ministerios.html">Ministérios</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contato</h5>
+        <ul>
+          <li>Rua Dona Anita Costa, 261 &middot; São Vicente, SP</li>
+          <li>(13) 3561-3765</li>
+          <li>cbpazsv@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> Comunidade Batista da Paz. Todos os direitos reservados.</span>
+      <div class="socials">
+        <a href="https://www.facebook.com/cbpsede" aria-label="Facebook" target="_blank" rel="noopener">f</a>
+        <a href="https://www.instagram.com/cbpsede/" aria-label="Instagram" target="_blank" rel="noopener">ig</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/app.js"></script>
 </body>
 </html>

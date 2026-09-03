@@ -99,6 +99,8 @@ nav.main-nav a {
 nav.main-nav a:hover, nav.main-nver a.active { color: var(--gold-light); border-color: var(--gold); }
 nav.main-nav a.active { color: var(--gold-light); border-color: var(--gold); }
 
+.btn-live { padding: 9px 18px; font-size: 0.7rem; white-space: nowrap; }
+
 .menu-toggle {
   display: none;
   background: none;
@@ -340,6 +342,7 @@ section.pad.tight { padding: 60px 0; }
 @media (max-width: 900px) {
   nav.main-nav { display: none; }
   .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .btn-live { padding: 8px 14px; font-size: 0.62rem; }
   .split, .contact-grid { grid-template-columns: 1fr; }
   .split.reverse { direction: ltr; }
   .split figure { order: -1; }

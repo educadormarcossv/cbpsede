@@ -1,0 +1,220 @@
+/* ===========================================================
+   Painel de Líderes - CBP Sede
+   Mesma identidade do site (vinho + dourado), adaptada para
+   uma interface de trabalho: mais densa, mais funcional.
+   =========================================================== */
+
+:root {
+  --a-wine: #6E1423;
+  --a-wine-dark: #4E0E19;
+  --a-gold: #C9A227;
+  --a-bg: #FBF7F0;
+  --a-card: #FFFFFF;
+  --a-ink: #241A1D;
+  --a-muted: #6B5D5F;
+  --a-line: #E7DCC9;
+  --a-green: #2AC56C;
+  --a-red: #C0392B;
+  --a-radius: 12px;
+  --a-shadow: 0 10px 28px -14px rgba(78, 14, 25, 0.28);
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* aliases usados em estilos inline dentro das páginas do painel */
+  --text-muted: var(--a-muted);
+  --border-color: var(--a-line);
+  --shadow-sm: var(--a-shadow);
+  --primary: var(--a-wine);
+  --primary-hover: var(--a-wine-dark);
+}
+
+* { box-sizing: border-box; }
+body.pagina-admin {
+  margin: 0;
+  background: var(--a-bg);
+  color: var(--a-ink);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  font-size: 15px;
+}
+img { max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3 { font-family: var(--font-heading); }
+
+/* ---------- Top bar ---------- */
+.admin-topo {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--a-wine-dark);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.admin-topo-wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+}
+.brand { display: flex; align-items: center; gap: 10px; color: #fff; }
+.brand .logo-icon { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.brand .name {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+}
+.brand .name small {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.68rem;
+  color: var(--a-gold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.admin-nav { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.admin-nav a {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #E4C9CE;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+}
+.admin-nav a:hover, .admin-nav a.ativo { color: #fff; border-color: var(--a-gold); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--a-gold);
+  color: var(--a-gold);
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Content wrap ---------- */
+.admin-conteudo-wrap { max-width: 1240px; margin: 0 auto; padding: 36px 24px 80px; }
+.admin-titulo { font-weight: 800; font-size: 1.5rem; color: var(--a-wine-dark); margin: 0 0 18px; }
+.trilha { font-size: 0.82rem; color: var(--a-muted); }
+.trilha a { color: var(--a-wine); font-weight: 600; }
+
+/* ---------- Summary cards ---------- */
+.cartoes-resumo { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 30px; }
+.cartao-resumo { background: var(--a-card); border: 1px solid var(--a-line); border-top: 3px solid var(--a-gold); border-radius: var(--a-radius); padding: 18px 20px; box-shadow: var(--a-shadow); }
+.cartao-resumo strong { display: block; font-family: var(--font-heading); font-size: 1.8rem; color: var(--a-wine); }
+.cartao-resumo span { font-size: 0.82rem; color: var(--a-muted); }
+
+.rotulo { display: inline-block; font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--a-muted); }
+
+/* ---------- Grid ---------- */
+.grid { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 860px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* ---------- Tables ---------- */
+.tabela-admin { width: 100%; border-collapse: collapse; background: var(--a-card); border: 1px solid var(--a-line); border-radius: var(--a-radius); overflow: hidden; font-size: 0.88rem; }
+.tabela-admin th, .tabela-admin td { text-align: left; padding: 11px 13px; border-bottom: 1px solid var(--a-line); }
+.tabela-admin th { background: var(--a-wine-dark); color: #fff; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+.tabela-admin tbody tr:last-child td { border-bottom: none; }
+.tabela-admin tbody tr:hover { background: #FBF1E7; }
+.tabela-admin a { color: var(--a-wine); font-weight: 600; }
+
+/* ---------- Forms ---------- */
+.formulario { max-width: 560px; }
+.formulario .campo { margin-bottom: 15px; }
+.formulario label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--a-ink); margin-bottom: 5px; }
+.formulario input[type="text"], .formulario input[type="email"], .formulario input[type="password"],
+.formulario input[type="date"], .formulario input[type="tel"], .formulario input[type="datetime-local"],
+.formulario input[type="time"], .formulario input[type="file"],
+.formulario select, .formulario textarea {
+  width: 100%; padding: 10px 13px; border: 1.5px solid var(--a-line); border-radius: 8px;
+  font-family: var(--font-body); font-size: 0.92rem; background: #fff; color: var(--a-ink);
+}
+.formulario textarea { min-height: 84px; resize: vertical; }
+.formulario input:focus, .formulario select:focus, .formulario textarea:focus { outline: none; border-color: var(--a-wine); }
+.grade-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 560px) { .grade-campos { grid-template-columns: 1fr; } }
+
+/* ---------- Buttons ---------- */
+.botao-primario, .botao-mini, .botao-fantasma {
+  display: inline-flex; align-items: center; gap: 6px; font-weight: 700; border-radius: 9999px;
+  cursor: pointer; text-decoration: none; border: none; font-family: var(--font-body);
+}
+.botao-primario { background: var(--a-wine); color: #fff; padding: 11px 22px; font-size: 0.88rem; }
+.botao-primario:hover { background: var(--a-wine-dark); }
+.botao-mini { background: var(--a-bg); color: var(--a-ink); border: 1px solid var(--a-line); padding: 6px 13px; font-size: 0.78rem; }
+.botao-mini:hover { border-color: var(--a-wine); color: var(--a-wine); }
+.botao-mini.perigo { color: var(--a-red); border-color: rgba(192,57,43,0.35); }
+.botao-mini.perigo:hover { background: rgba(192,57,43,0.08); }
+.botao-fantasma { background: transparent; color: var(--a-wine); padding: 6px 4px; font-size: 0.84rem; }
+
+/* ---------- Messages ---------- */
+.mensagem-flash, .mensagem-erro { padding: 11px 16px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 18px; }
+.mensagem-flash { background: rgba(42,197,108,0.12); color: #1c7a44; border: 1px solid rgba(42,197,108,0.3); }
+.mensagem-erro { background: rgba(192,57,43,0.1); color: var(--a-red); border: 1px solid rgba(192,57,43,0.3); }
+
+/* ---------- Badges ---------- */
+.badge-status { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 3px 9px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ---------- Avatars ---------- */
+.avatar-mini { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.avatar-vazio { width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,0.2); display: inline-block; }
+.avatar-grande { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; box-shadow: var(--a-shadow); }
+.avatar-grande-vazio { width: 84px; height: 84px; border-radius: 50%; background: var(--a-bg); border: 1.5px dashed var(--a-line); display: flex; align-items: center; justify-content: center; color: var(--a-muted); font-size: 1.4rem; }
+
+/* ---------- Login box ---------- */
+.caixa-login { max-width: 380px; margin: 90px auto; background: var(--a-card); border: 1px solid var(--a-line); border-top: 4px solid var(--a-gold); border-radius: 16px; padding: 38px 34px; box-shadow: var(--a-shadow); }
+
+/* ---------- Birthdays ---------- */
+.lista-aniversario { display: grid; gap: 9px; }
+.item-aniversario { display: flex; align-items: center; gap: 12px; background: var(--a-card); border: 1px solid var(--a-line); border-radius: 10px; padding: 10px 13px; }
+.item-aniversario .data { font-family: var(--font-heading); font-weight: 700; color: var(--a-wine); font-size: 0.82rem; width: 44px; flex-shrink: 0; }
+
+/* ---------- Document / file list ---------- */
+.lista-documentos { display: grid; gap: 10px; }
+.item-documento {
+  display: flex; align-items: center; gap: 14px; background: var(--a-card);
+  border: 1px solid var(--a-line); border-left: 3px solid var(--a-gold); border-radius: 10px; padding: 14px 16px;
+}
+.item-documento .icone { font-size: 1.3rem; color: var(--a-wine); width: 30px; text-align: center; flex-shrink: 0; }
+.item-documento .info { flex: 1; }
+.item-documento .info strong { display: block; font-size: 0.92rem; }
+.item-documento .info span { font-size: 0.78rem; color: var(--a-muted); }
+
+/* ---------- Agenda ---------- */
+.lista-agenda { display: grid; gap: 12px; }
+.item-agenda {
+  display: flex; gap: 16px; background: var(--a-card); border: 1px solid var(--a-line);
+  border-radius: var(--a-radius); padding: 16px 18px; align-items: flex-start;
+}
+.item-agenda .quando {
+  flex-shrink: 0; width: 64px; text-align: center; background: var(--a-wine-dark); color: #fff;
+  border-radius: 8px; padding: 8px 4px; font-family: var(--font-heading);
+}
+.item-agenda .quando .dia { display: block; font-size: 1.3rem; font-weight: 800; line-height: 1; }
+.item-agenda .quando .mes { display: block; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--a-gold); margin-top: 2px; }
+.item-agenda .conteudo h4 { margin: 0 0 4px; font-size: 1rem; }
+.item-agenda .conteudo p { margin: 0; font-size: 0.85rem; color: var(--a-muted); }
+.item-agenda .conteudo .meta { font-size: 0.78rem; color: var(--a-wine); font-weight: 600; margin-top: 6px; }
+
+/* ---------- Responsive nav ---------- */
+@media (max-width: 900px) {
+  .admin-nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--a-wine-dark);
+    flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 24px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .admin-nav.aberto { display: flex; }
+  .admin-nav a { padding: 10px 0; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .nav-toggle { display: flex; }
+}

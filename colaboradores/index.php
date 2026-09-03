@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/includes/auth.php';
 require_once __DIR__ . '/includes/funcoes.php';
-exigirLogin();
+exigirGestor();
 
 $pdo = conectarBanco();
 
@@ -9,8 +9,14 @@ $totalMembros = (int) $pdo->query("SELECT COUNT(*) FROM membros WHERE ativo = 1"
 $totalFamilias = (int) $pdo->query('SELECT COUNT(*) FROM familias')->fetchColumn();
 $totalCriancas = (int) $pdo->query('SELECT COUNT(*) FROM criancas')->fetchColumn();
 $totalMinisterios = (int) $pdo->query("SELECT COUNT(*) FROM ministerios WHERE ativo = 1")->fetchColumn();
+$totalDocumentos = (int) $pdo->query("SELECT COUNT(*) FROM documentos")->fetchColumn();
 
 $aniversariantes = buscarAniversariantes($pdo, 30);
+
+$proximosEventos = $pdo->query("
+    SELECT * FROM eventos WHERE data_evento >= CURDATE() ORDER BY data_evento, hora_evento LIMIT 5
+")->fetchAll();
+$mesesAbrev = [1=>'JAN',2=>'FEV',3=>'MAR',4=>'ABR',5=>'MAI',6=>'JUN',7=>'JUL',8=>'AGO',9=>'SET',10=>'OUT',11=>'NOV',12=>'DEZ'];
 
 $porMinisterio = $pdo->query("
     SELECT m.id, m.nome, COUNT(mm.id) AS total
@@ -36,11 +42,30 @@ require __DIR__ . '/includes/cabecalho.php';
   <div class="cartao-resumo"><strong><?= $totalFamilias ?></strong><span>famílias cadastradas</span></div>
   <div class="cartao-resumo"><strong><?= $totalCriancas ?></strong><span>crianças cadastradas</span></div>
   <div class="cartao-resumo"><strong><?= $totalMinisterios ?></strong><span>ministérios ativos</span></div>
+  <div class="cartao-resumo"><strong><?= $totalDocumentos ?></strong><span>arquivos no painel</span></div>
 </div>
 
 <div class="grid grid-2" style="align-items:start;gap:32px;">
   <div>
-    <span class="rotulo">🎂 Aniversariantes (próximos 30 dias)</span>
+    <span class="rotulo">📅 Próximos eventos</span>
+    <div class="lista-agenda" style="margin-top:14px;">
+      <?php if (!$proximosEventos): ?>
+      <p style="color:var(--text-muted);font-size:0.9rem;">Nenhum evento futuro na agenda ainda.</p>
+      <?php endif; ?>
+      <?php foreach ($proximosEventos as $e): $d = new DateTime($e['data_evento']); ?>
+      <div class="item-agenda">
+        <div class="quando"><span class="dia"><?= $d->format('d') ?></span><span class="mes"><?= $mesesAbrev[(int)$d->format('n')] ?></span></div>
+        <div class="conteudo">
+          <h4><a href="evento.php?id=<?= (int)$e['id'] ?>"><?= escaparHtml($e['titulo']) ?></a></h4>
+          <?php $meta = array_filter([$e['hora_evento'] ? substr($e['hora_evento'],0,5).'h' : null, $e['local']]); ?>
+          <?php if ($meta): ?><div class="meta"><?= escaparHtml(implode(' · ', $meta)) ?></div><?php endif; ?>
+        </div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+    <a href="agenda.php" class="botao-fantasma" style="margin-top:10px;display:inline-block;">Ver agenda completa →</a>
+
+    <span class="rotulo" style="margin-top:28px;display:block;">🎂 Aniversariantes (próximos 30 dias)</span>
     <div class="lista-aniversario" style="margin-top:14px;">
       <?php if (!$aniversariantes): ?>
       <p style="color:var(--text-muted);font-size:0.9rem;">Ninguém fazendo aniversário nos próximos 30 dias.</p>

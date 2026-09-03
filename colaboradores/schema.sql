@@ -108,6 +108,32 @@ INSERT INTO ministerios (nome, descricao) VALUES
   ('Escola Bíblica', 'Ensino sistemático das Escrituras para todas as idades.')
 ON DUPLICATE KEY UPDATE nome = VALUES(nome);
 
+CREATE TABLE IF NOT EXISTS eventos (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  titulo VARCHAR(150) NOT NULL,
+  descricao TEXT,
+  data_evento DATE NOT NULL,
+  hora_evento TIME NULL,
+  local VARCHAR(150),
+  categoria VARCHAR(80),
+  criado_por INT UNSIGNED,
+  criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (criado_por) REFERENCES membros(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS documentos (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  titulo VARCHAR(150) NOT NULL,
+  categoria VARCHAR(80),
+  descricao TEXT,
+  arquivo_caminho VARCHAR(255) NOT NULL,
+  arquivo_nome_original VARCHAR(255) NOT NULL,
+  tamanho_bytes INT UNSIGNED,
+  enviado_por INT UNSIGNED,
+  criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (enviado_por) REFERENCES membros(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- Primeiro acesso: crie o admin manualmente aqui (troque o e-mail e gere o hash com o PHP abaixo)
 -- php -r "echo password_hash('SUA_SENHA_AQUI', PASSWORD_DEFAULT);"
 -- INSERT INTO membros (nome, email, senha_hash, papel, ativo) VALUES ('Seu Nome', 'seu@email.com', 'COLE_O_HASH_AQUI', 'admin', 1);

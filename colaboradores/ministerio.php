@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/includes/auth.php';
 require_once __DIR__ . '/includes/funcoes.php';
-exigirLogin();
+exigirGestor();
 
 $pdo = conectarBanco();
 $id = (int) ($_GET['id'] ?? 0);

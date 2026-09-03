@@ -45,18 +45,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Entrar | Painel CBP Sede</title>
+<title>Entrar | Painel de Lideres CBP Sede</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
 <link rel="icon" href="../assets/images/favicon.png">
 </head>
 <body class="pagina-admin">
 <div class="caixa-login">
   <div style="text-align:center;margin-bottom:24px;">
     <img src="../assets/images/logo.jpg" alt="CBP Sede" style="width:64px;height:64px;border-radius:50%;box-shadow:var(--shadow-sm);margin:0 auto 14px;">
-    <h1 style="font-family:var(--font-heading);font-size:1.3rem;">Painel de Colaboradores</h1>
+    <h1 style="font-family:var(--font-heading);font-size:1.3rem;">Painel de Líderes</h1>
     <p style="color:var(--text-muted);font-size:0.9rem;">Comunidade Batista da Paz</p>
   </div>
   <?php if ($erro): ?><div class="mensagem-erro"><?= escaparHtml($erro) ?></div><?php endif; ?>

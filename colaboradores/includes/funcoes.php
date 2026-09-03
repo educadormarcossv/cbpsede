@@ -92,6 +92,60 @@ function salvarFotoUpload(array $arquivo, string $pastaDestinoAbsoluta, string $
     return $nomeArquivo;
 }
 
+/**
+ * Salva um arquivo enviado (documento, PDF, planilha, foto, etc.) com nome aleatório,
+ * preservando a extensão original. Retorna um array [nome_salvo, nome_original, tamanho]
+ * ou null se não houver arquivo. Lança erro em $erro por referência.
+ */
+function salvarDocumentoUpload(array $arquivo, string $pastaDestinoAbsoluta, ?string &$erro): ?array {
+    $erro = null;
+    if (empty($arquivo['name']) || $arquivo['error'] === UPLOAD_ERR_NO_FILE) {
+        return null;
+    }
+    if ($arquivo['error'] !== UPLOAD_ERR_OK) {
+        $erro = 'Falha no envio do arquivo.';
+        return null;
+    }
+    if ($arquivo['size'] > 20 * 1024 * 1024) {
+        $erro = 'Arquivo maior que 20MB.';
+        return null;
+    }
+    $extensoesPermitidas = ['pdf','doc','docx','xls','xlsx','ppt','pptx','jpg','jpeg','png','webp','txt','csv'];
+    $extensao = strtolower(pathinfo($arquivo['name'], PATHINFO_EXTENSION));
+    if (!in_array($extensao, $extensoesPermitidas, true)) {
+        $erro = 'Tipo de arquivo não permitido. Use PDF, Word, Excel, PowerPoint, imagem ou texto.';
+        return null;
+    }
+    if (!is_dir($pastaDestinoAbsoluta)) {
+        mkdir($pastaDestinoAbsoluta, 0755, true);
+    }
+    $nomeArquivo = 'doc_' . bin2hex(random_bytes(8)) . '.' . $extensao;
+    if (!move_uploaded_file($arquivo['tmp_name'], $pastaDestinoAbsoluta . '/' . $nomeArquivo)) {
+        $erro = 'Não foi possível salvar o arquivo no servidor.';
+        return null;
+    }
+    return [$nomeArquivo, $arquivo['name'], (int) $arquivo['size']];
+}
+
+function formatarTamanhoArquivo(?int $bytes): string {
+    if (!$bytes) return '-';
+    if ($bytes < 1024) return $bytes . ' B';
+    if ($bytes < 1024 * 1024) return round($bytes / 1024, 1) . ' KB';
+    return round($bytes / (1024 * 1024), 1) . ' MB';
+}
+
+function iconeParaExtensao(string $nomeArquivo): string {
+    $ext = strtolower(pathinfo($nomeArquivo, PATHINFO_EXTENSION));
+    return match (true) {
+        $ext === 'pdf' => 'fa-file-pdf',
+        in_array($ext, ['doc','docx'], true) => 'fa-file-word',
+        in_array($ext, ['xls','xlsx','csv'], true) => 'fa-file-excel',
+        in_array($ext, ['ppt','pptx'], true) => 'fa-file-powerpoint',
+        in_array($ext, ['jpg','jpeg','png','webp'], true) => 'fa-file-image',
+        default => 'fa-file',
+    };
+}
+
 /** Lista aniversariantes (membros e crianças) dos próximos $dias dias, ordenado pela próxima ocorrência. */
 function buscarAniversariantes(PDO $pdo, int $dias = 30): array {
     $sql = "

@@ -161,6 +161,21 @@ CREATE TABLE IF NOT EXISTS documentos (
   FOREIGN KEY (enviado_por) REFERENCES membros(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS lancamentos_financeiros (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  tipo ENUM('entrada','saida') NOT NULL,
+  categoria VARCHAR(80),
+  descricao VARCHAR(255) NOT NULL,
+  valor DECIMAL(10,2) NOT NULL,
+  data_lancamento DATE NOT NULL,
+  forma_pagamento VARCHAR(60),
+  comprovante_caminho VARCHAR(255),
+  observacoes TEXT,
+  criado_por INT UNSIGNED,
+  criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (criado_por) REFERENCES membros(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- Primeiro acesso: crie o admin manualmente aqui (troque o e-mail e gere o hash com o PHP abaixo)
 -- php -r "echo password_hash('SUA_SENHA_AQUI', PASSWORD_DEFAULT);"
 -- INSERT INTO membros (nome, email, senha_hash, papel, ativo) VALUES ('Seu Nome', 'seu@email.com', 'COLE_O_HASH_AQUI', 'admin', 1);

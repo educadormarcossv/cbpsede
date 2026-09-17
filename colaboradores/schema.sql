@@ -107,7 +107,8 @@ INSERT INTO ministerios (nome, descricao) VALUES
   ('Louvor e Adoração', 'Equipe responsável por conduzir a igreja em momentos de adoração nos cultos.'),
   ('Ação Social', 'Cuidado prático com famílias em vulnerabilidade dentro e fora da igreja.'),
   ('Missões', 'Envio e sustento de missionários, no Brasil e no exterior.'),
-  ('Escola Bíblica', 'Ensino sistemático das Escrituras para todas as idades.')
+  ('Escola Bíblica', 'Ensino sistemático das Escrituras para todas as idades.'),
+  ('Pastoreio', 'Colegiado pastoral da igreja: cuidado espiritual, ensino e direção da CBP.')
 ON DUPLICATE KEY UPDATE nome = VALUES(nome);
 
 CREATE TABLE IF NOT EXISTS eventos (

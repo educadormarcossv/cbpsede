@@ -84,6 +84,7 @@ require __DIR__ . '/includes/cabecalho.php';
       </div>
       <?php endforeach; ?>
     </div>
+    <a href="aniversariantes.php" class="botao-fantasma" style="margin-top:10px;display:inline-block;">Relatório por mês (imprimir) →</a>
   </div>
 
   <div>

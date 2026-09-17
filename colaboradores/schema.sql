@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS membros (
   papel ENUM('admin','pastor','lider','membro') NOT NULL DEFAULT 'membro',
   foto_caminho VARCHAR(255),
   data_nascimento DATE,
+  sexo ENUM('M','F') NULL,
   telefone VARCHAR(30),
   endereco VARCHAR(255),
   bairro VARCHAR(100),

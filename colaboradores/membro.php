@@ -30,13 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $erro = $erroFoto;
             } else {
                 $stmt = $pdo->prepare('
-                    UPDATE membros SET nome=?, data_nascimento=?, telefone=?, endereco=?, bairro=?, cidade=?, estado=?, cep=?,
+                    UPDATE membros SET nome=?, data_nascimento=?, sexo=?, telefone=?, endereco=?, bairro=?, cidade=?, estado=?, cep=?,
                     estado_civil=?, membro_desde=?, modo_recepcao=?, batizado=?, data_batismo=?, observacoes=?, ativo=?' .
                     ($novaFoto ? ', foto_caminho=?' : '') . ' WHERE id=?'
                 );
                 $params = [
                     $nome,
                     trim($_POST['data_nascimento'] ?? '') ?: null,
+                    trim($_POST['sexo'] ?? '') ?: null,
                     trim($_POST['telefone'] ?? '') ?: null,
                     trim($_POST['endereco'] ?? '') ?: null,
                     trim($_POST['bairro'] ?? '') ?: null,
@@ -181,6 +182,16 @@ require __DIR__ . '/includes/cabecalho.php';
           <label for="data_nascimento">Data de nascimento</label>
           <input type="date" id="data_nascimento" name="data_nascimento" value="<?= escaparHtml($membro['data_nascimento']) ?>">
         </div>
+        <div class="campo">
+          <label for="sexo">Sexo</label>
+          <select id="sexo" name="sexo">
+            <option value="">-</option>
+            <option value="F" <?= $membro['sexo']==='F'?'selected':'' ?>>Feminino</option>
+            <option value="M" <?= $membro['sexo']==='M'?'selected':'' ?>>Masculino</option>
+          </select>
+        </div>
+      </div>
+      <div class="grade-campos">
         <div class="campo">
           <label for="telefone">Telefone / WhatsApp</label>
           <input type="text" id="telefone" name="telefone" value="<?= escaparHtml($membro['telefone']) ?>">

@@ -30,6 +30,7 @@
       <a href="agenda.php" class="<?= in_array(basename($_SERVER['PHP_SELF']), ['agenda.php','evento.php']) ? 'ativo' : '' ?>">Agenda</a>
       <a href="documentos.php" class="<?= basename($_SERVER['PHP_SELF']) === 'documentos.php' ? 'ativo' : '' ?>">Arquivos</a>
       <a href="tesouraria.php" class="<?= basename($_SERVER['PHP_SELF']) === 'tesouraria.php' ? 'ativo' : '' ?>">Tesouraria</a>
+      <a href="relatorios.php" class="<?= basename($_SERVER['PHP_SELF']) === 'relatorios.php' ? 'ativo' : '' ?>">Relatórios</a>
       <?php else: ?>
       <a href="meu-ministerio.php" class="<?= basename($_SERVER['PHP_SELF']) === 'meu-ministerio.php' ? 'ativo' : '' ?>">Meu Ministério</a>
       <?php endif; ?>

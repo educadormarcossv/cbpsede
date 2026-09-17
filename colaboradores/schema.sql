@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS membros (
   nome VARCHAR(150) NOT NULL,
   email VARCHAR(190) UNIQUE,
   senha_hash VARCHAR(255),
-  papel ENUM('admin','lider','membro') NOT NULL DEFAULT 'membro',
+  papel ENUM('admin','pastor','lider','membro') NOT NULL DEFAULT 'membro',
   foto_caminho VARCHAR(255),
   data_nascimento DATE,
   telefone VARCHAR(30),

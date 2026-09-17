@@ -316,40 +316,76 @@ require __DIR__ . '/includes/cabecalho.php';
     </form>
 
     <?php if (ehAdmin()): ?>
-    <span class="rotulo" style="margin-top:28px;display:block;">🔒 Acesso ao painel</span>
-    <p style="color:var(--text-muted);font-size:13px;margin-top:6px;">Só quem tem e-mail e senha aqui consegue entrar no painel de colaboradores.</p>
-    <?php if ($membro['token_acesso'] && strtotime($membro['token_acesso_expira']) > time()): ?>
-    <p style="font-size:13px;background:rgba(201,162,39,.15);color:#8a6d10;padding:8px 12px;border-radius:8px;">
-      Convite enviado, aguardando a pessoa definir a senha (expira em <?= formatarData($membro['token_acesso_expira']) ?>).
+    <span class="rotulo" style="margin-top:28px;display:block;">🔒 Acesso de <?= escaparHtml($membro['nome']) ?> ao painel</span>
+    <p style="color:var(--text-muted);font-size:13px;margin-top:6px;">
+      Tudo aqui embaixo é só sobre o login <strong>desta pessoa</strong> (<?= escaparHtml($membro['nome']) ?>), pra
+      entrar no Painel de Líderes. Não mexe no acesso de mais ninguém.
+    </p>
+    <?php if ($membro['email']): ?>
+    <p style="font-size:13px;background:rgba(42,197,108,.12);color:#1c7a44;padding:8px 12px;border-radius:8px;margin-top:8px;">
+      Hoje o acesso dela é com o e-mail <strong><?= escaparHtml($membro['email']) ?></strong>, papel
+      <strong><?= escaparHtml(ucfirst($membro['papel'])) ?></strong>.
     </p>
     <?php endif; ?>
-    <form method="post" class="formulario" style="margin-top:12px;max-width:none;">
-      <input type="hidden" name="csrf" value="<?= gerarTokenCsrf() ?>">
-      <div class="grade-campos">
-        <div class="campo">
-          <label for="email">E-mail de acesso</label>
-          <input type="email" id="email" name="email" value="<?= escaparHtml($membro['email']) ?>">
+    <?php if ($membro['token_acesso'] && strtotime($membro['token_acesso_expira']) > time()): ?>
+    <p style="font-size:13px;background:rgba(201,162,39,.15);color:#8a6d10;padding:8px 12px;border-radius:8px;margin-top:8px;">
+      ⏳ Convite enviado, aguardando <?= escaparHtml($membro['nome']) ?> definir a senha (expira em
+      <?= formatarData($membro['token_acesso_expira']) ?>). Se enviar outro convite, este é substituído.
+    </p>
+    <?php endif; ?>
+
+    <div style="background:rgba(110,20,35,.05);border:1.5px solid var(--a-wine);border-radius:var(--a-radius);padding:18px 20px;margin-top:16px;">
+      <strong style="font-size:0.92rem;color:var(--a-wine-dark);">✉️ Jeito recomendado: mandar um convite</strong>
+      <p style="font-size:13px;color:var(--text-muted);margin:6px 0 14px;">
+        Você só define o e-mail e o papel. <?= escaparHtml($membro['nome']) ?> recebe um link por e-mail e cria a
+        própria senha, sem você precisar saber ou inventar senha nenhuma.
+      </p>
+      <form method="post" class="formulario" style="max-width:none;">
+        <input type="hidden" name="csrf" value="<?= gerarTokenCsrf() ?>">
+        <input type="hidden" name="nova_senha" value="">
+        <div class="grade-campos">
+          <div class="campo">
+            <label for="email">E-mail de <?= escaparHtml($membro['nome']) ?></label>
+            <input type="email" id="email" name="email" value="<?= escaparHtml($membro['email']) ?>" placeholder="email@exemplo.com">
+          </div>
+          <div class="campo">
+            <label for="papel">Papel no painel</label>
+            <select id="papel" name="papel">
+              <?php foreach (['membro'=>'Membro (sem acesso ao painel geral)','lider'=>'Líder de ministério','pastor'=>'Pastor','admin'=>'Administrador'] as $k=>$v): ?>
+              <option value="<?= $k ?>" <?= $membro['papel']===$k?'selected':'' ?>><?= $v ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+        <button type="submit" name="acao" value="enviar_convite" class="botao-primario">✉️ Enviar convite por e-mail</button>
+      </form>
+    </div>
+
+    <details style="margin-top:14px;">
+      <summary style="cursor:pointer;font-size:13px;color:var(--text-muted);">Prefiro definir a senha eu mesmo (sem e-mail)</summary>
+      <form method="post" class="formulario" style="margin-top:12px;max-width:none;">
+        <input type="hidden" name="csrf" value="<?= gerarTokenCsrf() ?>">
+        <div class="grade-campos">
+          <div class="campo">
+            <label for="email2">E-mail de <?= escaparHtml($membro['nome']) ?></label>
+            <input type="email" id="email2" name="email" value="<?= escaparHtml($membro['email']) ?>" placeholder="email@exemplo.com">
+          </div>
+          <div class="campo">
+            <label for="papel2">Papel no painel</label>
+            <select id="papel2" name="papel">
+              <?php foreach (['membro'=>'Membro (sem acesso ao painel geral)','lider'=>'Líder de ministério','pastor'=>'Pastor','admin'=>'Administrador'] as $k=>$v): ?>
+              <option value="<?= $k ?>" <?= $membro['papel']===$k?'selected':'' ?>><?= $v ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
         </div>
         <div class="campo">
-          <label for="papel">Papel no painel</label>
-          <select id="papel" name="papel">
-            <?php foreach (['membro'=>'Membro (sem acesso)','lider'=>'Líder','admin'=>'Administrador'] as $k=>$v): ?>
-            <option value="<?= $k ?>" <?= $membro['papel']===$k?'selected':'' ?>><?= $v ?></option>
-            <?php endforeach; ?>
-          </select>
+          <label for="nova_senha">Senha que você está definindo agora</label>
+          <input type="password" id="nova_senha" name="nova_senha" placeholder="Digite a senha">
         </div>
-      </div>
-      <div class="campo">
-        <label for="nova_senha">Definir/redefinir senha manualmente (deixe em branco pra não alterar)</label>
-        <input type="password" id="nova_senha" name="nova_senha" placeholder="Nova senha">
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button type="submit" name="acao" value="acesso_painel" class="botao-mini">Salvar acesso</button>
-        <button type="submit" name="acao" value="enviar_convite" class="botao-mini" style="background:var(--a-wine);color:#fff;border-color:var(--a-wine);">✉️ Enviar convite por e-mail</button>
-      </div>
-      <p style="font-size:12px;color:var(--text-muted);margin-top:8px;">"Enviar convite" ignora o campo de senha acima e manda um link
-      para a pessoa criar a própria senha.</p>
-    </form>
+        <button type="submit" name="acao" value="acesso_painel" class="botao-mini">Salvar essa senha agora</button>
+      </form>
+    </details>
     <?php endif; ?>
   </div>
 </div>

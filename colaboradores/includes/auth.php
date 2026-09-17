@@ -54,9 +54,9 @@ function ehAdmin(): bool {
     return membroAtualPapel() === 'admin';
 }
 
-/** Líderes de ministério também administram o painel (cadastros, famílias, crianças). */
+/** Pastores e líderes de ministério também administram o painel (cadastros, famílias, crianças). */
 function ehGestor(): bool {
-    return in_array(membroAtualPapel(), ['admin', 'lider'], true);
+    return in_array(membroAtualPapel(), ['admin', 'pastor', 'lider'], true);
 }
 
 function exigirGestor(): void {

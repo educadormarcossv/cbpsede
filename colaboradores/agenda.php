@@ -68,6 +68,20 @@ require __DIR__ . '/includes/cabecalho.php';
 <?php if ($sucesso): ?><div class="mensagem-flash"><?= escaparHtml($sucesso) ?></div><?php endif; ?>
 <?php if ($erro): ?><div class="mensagem-erro"><?= escaparHtml($erro) ?></div><?php endif; ?>
 
+<?php if (ehAdmin()):
+    $urlIcs = 'https://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . '/agenda.ics.php?token=' . ICS_TOKEN;
+?>
+<div style="background:var(--a-card);border:1px solid var(--a-line);border-left:3px solid var(--a-gold);border-radius:var(--a-radius);padding:16px 20px;margin-bottom:24px;">
+  <strong style="font-size:0.9rem;">📅 Ver esta agenda no Google Agenda</strong>
+  <p style="font-size:0.85rem;color:var(--a-muted);margin:6px 0 10px;">
+    No Google Agenda (computador): "Outras agendas" → "+" → "A partir do URL" → cole o link abaixo.
+    Não compartilhe esse link, ele dá acesso de leitura à agenda do painel.
+  </p>
+  <input type="text" readonly value="<?= escaparHtml($urlIcs) ?>" onclick="this.select()"
+         style="width:100%;padding:9px 12px;border:1px solid var(--a-line);border-radius:8px;font-size:0.82rem;color:var(--a-wine);">
+</div>
+<?php endif; ?>
+
 <div class="grid grid-2" style="align-items:start;gap:32px;">
   <div>
     <span class="rotulo">Próximos eventos</span>

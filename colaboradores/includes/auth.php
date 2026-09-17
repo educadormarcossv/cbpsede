@@ -68,6 +68,16 @@ function exigirGestor(): void {
     }
 }
 
+/** Verdadeiro se a pessoa logada lidera especificamente esse ministério (ou já é admin/líder geral). */
+function ehLiderDoMinisterio(PDO $pdo, int $ministerioId): bool {
+    if (!estaLogado()) return false;
+    if (ehGestor()) return true;
+    $stmt = $pdo->prepare('SELECT lider_id FROM ministerios WHERE id = ?');
+    $stmt->execute([$ministerioId]);
+    $liderId = $stmt->fetchColumn();
+    return $liderId !== false && $liderId !== null && (int) $liderId === membroAtualId();
+}
+
 function exigirAdmin(): void {
     exigirLogin();
     if (!ehAdmin()) {

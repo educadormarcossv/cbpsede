@@ -4,6 +4,11 @@ function escaparHtml(?string $valor): string {
     return htmlspecialchars($valor ?? '', ENT_QUOTES, 'UTF-8');
 }
 
+/** Para onde mandar a pessoa depois do login, conforme o papel dela. */
+function destinoPosLogin(string $papel): string {
+    return $papel === 'membro' ? 'meu-ministerio.php' : 'index.php';
+}
+
 function formatarData(?string $data): string {
     if (!$data) return '-';
     $ts = strtotime($data);

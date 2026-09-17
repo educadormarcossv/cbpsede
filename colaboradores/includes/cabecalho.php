@@ -21,6 +21,7 @@
       <span class="name">CBP SEDE<small>Painel de Líderes</small></span>
     </a>
     <nav class="admin-nav">
+      <?php if (ehGestor()): ?>
       <a href="index.php" class="<?= basename($_SERVER['PHP_SELF']) === 'index.php' ? 'ativo' : '' ?>">Início</a>
       <a href="membros.php" class="<?= in_array(basename($_SERVER['PHP_SELF']), ['membros.php','membro.php']) ? 'ativo' : '' ?>">Membresia</a>
       <a href="familias.php" class="<?= in_array(basename($_SERVER['PHP_SELF']), ['familias.php','familia.php']) ? 'ativo' : '' ?>">Famílias</a>
@@ -28,6 +29,9 @@
       <a href="ministerios.php" class="<?= in_array(basename($_SERVER['PHP_SELF']), ['ministerios.php','ministerio.php']) ? 'ativo' : '' ?>">Ministérios</a>
       <a href="agenda.php" class="<?= in_array(basename($_SERVER['PHP_SELF']), ['agenda.php','evento.php']) ? 'ativo' : '' ?>">Agenda</a>
       <a href="documentos.php" class="<?= basename($_SERVER['PHP_SELF']) === 'documentos.php' ? 'ativo' : '' ?>">Arquivos</a>
+      <?php else: ?>
+      <a href="meu-ministerio.php" class="<?= basename($_SERVER['PHP_SELF']) === 'meu-ministerio.php' ? 'ativo' : '' ?>">Meu Ministério</a>
+      <?php endif; ?>
       <a href="meu-perfil.php" class="<?= basename($_SERVER['PHP_SELF']) === 'meu-perfil.php' ? 'ativo' : '' ?>">
         <?php if (fotoExisteNoServidor(membroAtualFoto())): ?>
         <img src="<?= escaparHtml(membroAtualFoto()) ?>" alt="" class="avatar-mini">

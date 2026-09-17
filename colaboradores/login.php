@@ -3,7 +3,7 @@ require_once __DIR__ . '/includes/auth.php';
 require_once __DIR__ . '/includes/funcoes.php';
 
 if (estaLogado()) {
-    header('Location: index.php');
+    header('Location: ' . destinoPosLogin(membroAtualPapel()));
     exit;
 }
 
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['membro_foto'] = $membro['foto_caminho'] ? 'uploads/perfil/' . $membro['foto_caminho'] : null;
             $_SESSION['ultimo_acesso'] = time();
             $pdo->prepare('UPDATE membros SET ultimo_acesso = NOW() WHERE id = ?')->execute([$membro['id']]);
-            header('Location: index.php');
+            header('Location: ' . destinoPosLogin($membro['papel']));
             exit;
         }
     }

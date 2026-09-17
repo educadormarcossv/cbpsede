@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS membros (
   ativo TINYINT(1) NOT NULL DEFAULT 1,
   observacoes TEXT,
   ultimo_acesso DATETIME NULL,
+  token_acesso VARCHAR(64) NULL,
+  token_acesso_expira DATETIME NULL,
   criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (familia_id) REFERENCES familias(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

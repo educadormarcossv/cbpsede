@@ -9,6 +9,27 @@ function destinoPosLogin(string $papel): string {
     return $papel === 'membro' ? 'meu-ministerio.php' : 'index.php';
 }
 
+/**
+ * Envia por e-mail o convite de acesso ao painel, com um link para a pessoa definir
+ * a própria senha. Retorna true se o servidor aceitou enviar (não garante entrega).
+ */
+function enviarEmailConvite(string $paraEmail, string $paraNome, string $link): bool {
+    $assunto = 'Seu acesso ao Painel de Lideres - CBP Sede';
+    $corpo = "Ola, {$paraNome}!\n\n"
+        . "Voce recebeu acesso ao Painel de Lideres da Comunidade Batista da Paz.\n\n"
+        . "Para comecar, defina sua senha neste link:\n{$link}\n\n"
+        . "Esse link e valido por 7 dias. Se voce nao esperava este e-mail, pode ignora-lo.\n\n"
+        . "Deus abencoe!\nCBP Sede\n";
+
+    $de = 'nao-responda@cbpsede.com.br';
+    $cabecalhos = "From: CBP Sede <{$de}>\r\n"
+        . "Reply-To: cbpazsv@gmail.com\r\n"
+        . "Content-Type: text/plain; charset=UTF-8\r\n"
+        . "X-Mailer: PHP/" . phpversion();
+
+    return @mail($paraEmail, $assunto, $corpo, $cabecalhos);
+}
+
 function formatarData(?string $data): string {
     if (!$data) return '-';
     $ts = strtotime($data);

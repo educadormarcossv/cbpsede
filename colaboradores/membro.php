@@ -65,13 +65,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $erro = 'Informe o e-mail para dar acesso ao painel.';
         } else {
             if ($novaSenha !== '') {
-                $stmt = $pdo->prepare('UPDATE membros SET email=?, papel=?, senha_hash=? WHERE id=?');
+                $stmt = $pdo->prepare('UPDATE membros SET email=?, papel=?, senha_hash=?, token_acesso=NULL, token_acesso_expira=NULL WHERE id=?');
                 $stmt->execute([$email, $papel, password_hash($novaSenha, PASSWORD_DEFAULT), $id]);
             } else {
                 $stmt = $pdo->prepare('UPDATE membros SET email=?, papel=? WHERE id=?');
                 $stmt->execute([$email, $papel, $id]);
             }
             $sucesso = 'Acesso ao painel atualizado.';
+        }
+    } elseif (($_POST['acao'] ?? '') === 'enviar_convite' && ehAdmin()) {
+        $email = trim($_POST['email'] ?? '');
+        $papel = $_POST['papel'] ?? 'membro';
+        if ($email === '') {
+            $erro = 'Informe o e-mail para enviar o convite.';
+        } else {
+            $token = bin2hex(random_bytes(32));
+            $expira = date('Y-m-d H:i:s', strtotime('+7 days'));
+            $stmt = $pdo->prepare('UPDATE membros SET email=?, papel=?, token_acesso=?, token_acesso_expira=? WHERE id=?');
+            $stmt->execute([$email, $papel, $token, $expira, $id]);
+
+            $link = 'https://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . '/definir-senha.php?token=' . $token;
+            $enviado = enviarEmailConvite($email, $membro['nome'], $link);
+
+            if ($enviado) {
+                $sucesso = 'Convite enviado para ' . $email . '.';
+            } else {
+                $erro = 'O servidor não confirmou o envio do e-mail. O link de convite é: ' . $link;
+            }
         }
     } elseif (($_POST['acao'] ?? '') === 'ligar_familia') {
         $familiaId = (int) ($_POST['familia_id'] ?? 0);
@@ -298,8 +318,12 @@ require __DIR__ . '/includes/cabecalho.php';
     <?php if (ehAdmin()): ?>
     <span class="rotulo" style="margin-top:28px;display:block;">🔒 Acesso ao painel</span>
     <p style="color:var(--text-muted);font-size:13px;margin-top:6px;">Só quem tem e-mail e senha aqui consegue entrar no painel de colaboradores.</p>
+    <?php if ($membro['token_acesso'] && strtotime($membro['token_acesso_expira']) > time()): ?>
+    <p style="font-size:13px;background:rgba(201,162,39,.15);color:#8a6d10;padding:8px 12px;border-radius:8px;">
+      Convite enviado, aguardando a pessoa definir a senha (expira em <?= formatarData($membro['token_acesso_expira']) ?>).
+    </p>
+    <?php endif; ?>
     <form method="post" class="formulario" style="margin-top:12px;max-width:none;">
-      <input type="hidden" name="acao" value="acesso_painel">
       <input type="hidden" name="csrf" value="<?= gerarTokenCsrf() ?>">
       <div class="grade-campos">
         <div class="campo">
@@ -316,10 +340,15 @@ require __DIR__ . '/includes/cabecalho.php';
         </div>
       </div>
       <div class="campo">
-        <label for="nova_senha">Definir/redefinir senha (deixe em branco pra não alterar)</label>
+        <label for="nova_senha">Definir/redefinir senha manualmente (deixe em branco pra não alterar)</label>
         <input type="password" id="nova_senha" name="nova_senha" placeholder="Nova senha">
       </div>
-      <button type="submit" class="botao-mini">Salvar acesso</button>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button type="submit" name="acao" value="acesso_painel" class="botao-mini">Salvar acesso</button>
+        <button type="submit" name="acao" value="enviar_convite" class="botao-mini" style="background:var(--a-wine);color:#fff;border-color:var(--a-wine);">✉️ Enviar convite por e-mail</button>
+      </div>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px;">"Enviar convite" ignora o campo de senha acima e manda um link
+      para a pessoa criar a própria senha.</p>
     </form>
     <?php endif; ?>
   </div>
